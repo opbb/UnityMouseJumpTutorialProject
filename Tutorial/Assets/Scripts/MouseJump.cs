@@ -95,7 +95,7 @@ public class MouseJump : MonoBehaviour
             playerToMouse.y = playerToMouse.y / Screen.height;
 
             // Limit the effect of mouse placement.
-            playerToMouse = Vector3.ClampMagnitude(playerToMouse, maxMouseDistance);
+            playerToMouse = Vector2.ClampMagnitude(playerToMouse, maxMouseDistance);
 
             if (!jumpPressed)
             {
@@ -202,7 +202,7 @@ public class MouseJump : MonoBehaviour
 
 
     /* 
-     * Calculates an object's displacement after _elpsedTime_ when starting with _initialVelocity_
+     * Calculates the player's position after _elpsedTime_ when starting with _initialVelocity_
      * 
      * Math behind it (Kinematic Formula #3):
      * deltaY = V_0 * t + 1/2 * a_Y * t^2
