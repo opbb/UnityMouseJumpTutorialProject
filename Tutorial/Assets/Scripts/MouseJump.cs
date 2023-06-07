@@ -164,7 +164,7 @@ public class MouseJump : MonoBehaviour
 
         while (nextPointTime <= maxTelegraphTime)
         {
-            Vector2 nextPoint = calculatePointAfterTime(initialVelocityPrediction, nextPointTime);
+            Vector2 nextPoint = calculatePositionAfterTime(initialVelocityPrediction, nextPointTime);
             Vector2 currentToNextPoint = nextPoint - currentPoint;
 
             RaycastHit2D groundCheck = Physics2D.Raycast(currentPoint, currentToNextPoint.normalized, currentToNextPoint.magnitude, standableLayers);
@@ -210,10 +210,12 @@ public class MouseJump : MonoBehaviour
      * Translation:
      * displacement = initialVelocity * elapsedTime + 1/2 * accelerationDueToGravity * elapsedTime^2
      * 
+     * Note that this also add the player's current postion, so predicted displacement becomes predicted position.
+     * 
      * Furether Reading/Where I stole this from:
      * https://www.khanacademy.org/science/physics/two-dimensional-motion/two-dimensional-projectile-mot/a/what-is-2d-projectile-motion
      */
-    private Vector2 calculatePointAfterTime(Vector2 initialVelocity, float elapsedTime)
+    private Vector2 calculatePositionAfterTime(Vector2 initialVelocity, float elapsedTime)
     {
         return new Vector2(transform.position.x, transform.position.y) + initialVelocity * elapsedTime + 
                    Physics2D.gravity * (elapsedTime * elapsedTime * 0.5f) * rb.gravityScale;
